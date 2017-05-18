@@ -9,6 +9,11 @@ TELECOM_DICT = {'10010': 1, '10000': 1, '10001': 1, '10086': 1}
 
 
 def tel_validate(tel_string):
+    """
+    Telephone number validation
+    :param tel_string: tel number
+    :return: Validate result of tel number
+    """
     if len(tel_string) < 3:
         return False
 
@@ -78,6 +83,11 @@ def tel_validate(tel_string):
 
 
 def remove_area_code(tel_string):
+    """
+    Remove local area digits from a telephone number
+    :param tel_string: Tel number
+    :return: Tel number without local area digits
+    """
     area_code_length = 0
     if tel_string[:4] in AREA_FOUR_DIGIT_DICT:
         area_code_length = 4
@@ -91,6 +101,11 @@ def remove_area_code(tel_string):
 
 
 def region_check(tel_string):
+    """
+    Telephone number validation with global region digits
+    :param tel_string: Tel number
+    :return: Validate result of tel number
+    """
     # Check if + exist in the first digit
     if not tel_string.startswith("+") and not tel_string.startswith("00"):
         return False
@@ -138,6 +153,11 @@ def region_check(tel_string):
 
 
 def tel_reform(tel_number):
+    """
+    Check and reform the telephone number
+    :param tel_number: Tel number
+    :return: Reformed tel number. Return None if the tel is not valid
+    """
     tel_string = str(tel_number).replace("-", "")
 
     # Region check
