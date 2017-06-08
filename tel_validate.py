@@ -2,7 +2,7 @@ from country_call_code import *
 from area_code import *
 from tel_list_for_test import *
 
-CELL_PHONE_DICT = {'13': 1, '17': 1, '18': 1, '14': 1, '15': 1}
+CELL_PHONE_DICT = {'13': 1, '14': 1, '15': 1, '17': 1, '18': 1}
 HOTLINE_FIVE_DIGIT_DICT = {'10': 1, '11': 1, '12': 1}
 HOTLINE_TEN_DIGIT_DICT = {'400': 1, '800': 1}
 TELECOM_DICT = {'10010': 1, '10000': 1, '10001': 1, '10086': 1}
@@ -27,8 +27,8 @@ def tel_validate(tel_string):
         # print("95, 12 Hotline")
         return True
 
-    # 95 Long tel
-    if tel_string.startswith("95") and 5 <= len(tel_string) <= 17:
+    # 95, 095 Long tel
+    if (tel_string.startswith("95") or tel_string.startswith("095")) and 5 <= len(tel_string) <= 17:
         # print("SMS")
         return True
 
@@ -48,7 +48,7 @@ def tel_validate(tel_string):
         return True
 
     # SMS
-    if tel_string.startswith("1065") or tel_string.startswith("1069") or tel_string.startswith("125"):
+    if tel_string.startswith("106") or tel_string.startswith("125"):
         # print("SMS")
         return True
 
@@ -76,7 +76,7 @@ def tel_validate(tel_string):
             return True
 
         # Normal tel
-        if 6 < len(tel_without_area_code) < 9:
+        if 7 <= len(tel_without_area_code) <= 8:
             # print("Normal tel")
             return True
     return False
@@ -184,3 +184,5 @@ if __name__ == "__main__":
             print("%s => False" % tel)
         else:
             print("%s => %s" % (tel, tel_reform(tel)))
+
+    print(tel_reform("000195852212"))
