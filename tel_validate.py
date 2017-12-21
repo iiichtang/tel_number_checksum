@@ -32,6 +32,11 @@ def tel_validate(tel_string):
         # print("SMS")
         return True
 
+    # 96 Hotline
+    if tel_without_area_code.startswith("96") and 5 <= len(tel_without_area_code) <= 7:
+        # print("96 Hotline")
+        return True
+
     # 400, 800 Hotline
     if tel_string[0:3] in HOTLINE_TEN_DIGIT_DICT and len(tel_string) == 10:
         # print("400, 800 Hotline")
@@ -55,6 +60,11 @@ def tel_validate(tel_string):
     # Special hotline
     if tel_string.startswith("1") and len(tel_string) == 3:
         # print("Special hotline")
+        return True
+
+    # Normal tel
+    if tel_string[0] != "1" and 7 <= len(tel_without_area_code) <= 8:
+        # print("Normal tel")
         return True
 
     # Remove area code
