@@ -1,6 +1,6 @@
 from country_call_code import *
 from area_code import *
-from tel_list_for_test import *
+#from tel_list_for_test import *
 
 CELL_PHONE_DICT = {'13': 1, '14': 1, '15': 1, '17': 1, '18': 1}
 HOTLINE_FIVE_DIGIT_DICT = {'10': 1, '11': 1, '12': 1}
@@ -32,18 +32,13 @@ def tel_validate(tel_string):
         # print("SMS")
         return True
 
-    # 96 Hotline
-    if tel_without_area_code.startswith("96") and 5 <= len(tel_without_area_code) <= 7:
-        # print("96 Hotline")
-        return True
-
     # 400, 800 Hotline
     if tel_string[0:3] in HOTLINE_TEN_DIGIT_DICT and len(tel_string) == 10:
         # print("400, 800 Hotline")
         return True
 
     # Telecom
-    if tel_string in TELECOM_DICT:
+    if tel_string[0:5] in TELECOM_DICT and len(tel_string) <= 15:
         # print("telecom")
         return True
 
@@ -62,11 +57,6 @@ def tel_validate(tel_string):
         # print("Special hotline")
         return True
 
-    # Normal tel
-    if tel_string[0] != "1" and 7 <= len(tel_without_area_code) <= 8:
-        # print("Normal tel")
-        return True
-
     # Remove area code
     tel_without_area_code = remove_area_code(tel_string)
     if tel_without_area_code is not False:
@@ -83,6 +73,11 @@ def tel_validate(tel_string):
         # 95 Long tel
         if tel_without_area_code.startswith("95") and 5 <= len(tel_without_area_code) <= 17:
             # print("SMS")
+            return True
+
+        # Telecom
+        if tel_without_area_code[0:5] in TELECOM_DICT and len(tel_without_area_code) <= 15:
+            # print("telecom")
             return True
 
         # Normal tel
@@ -188,11 +183,13 @@ def tel_reform(tel_number):
 
 
 if __name__ == "__main__":
+    """
     for tel in valid_86_region_list:
         result = tel_reform(tel)
         if result is None:
             print("%s => False" % tel)
         else:
             print("%s => %s" % (tel, tel_reform(tel)))
-
-    print(tel_reform("000195852212"))
+    """
+    print(tel_reform("10010"))
+    print(tel_reform("01010010"))
